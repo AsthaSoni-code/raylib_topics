@@ -2,34 +2,34 @@ const r = require("raylib");
 
 function setup() {
   const width = 800;
-  const height = 400;
+  const height = 500;
   const fps = 60;
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(width, height, "random");
   r.SetTargetFPS(fps);
 
-  const numberOfValues = 80;
+  const rectangle = {
+    x: 200,
+    y: 100,
+    width: 400,
+    height: 250,
+  };
 
-  const startXValue = 200;
-  const endXValue = 500;
+  const numberOfValues = 100;
+
+  const startXValue = rectangle.x;
+  const endXValue = rectangle.x + rectangle.width;
   const x1 = startXValue;
   const x2 = endXValue - startXValue;
 
-  const startYValue = 100;
-  const endYValue = 250;
+  const startYValue = rectangle.y;
+  const endYValue = rectangle.y + rectangle.height;
   const y1 = startYValue;
   const y2 = endYValue - startYValue;
 
   const xAxis = random(numberOfValues, x1, x2);
   const yAxis = random(numberOfValues, y1, y2);
-
-  const rectangle = {
-    x: 200,
-    y: 100,
-    width: 300,
-    height: 150,
-  };
 
   return { xAxis, yAxis, numberOfValues, height, rectangle };
 }
