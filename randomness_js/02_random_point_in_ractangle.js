@@ -10,6 +10,7 @@ function setup() {
   r.SetTargetFPS(fps);
 
   const numberOfValues = 100;
+
   const startXValue = 0;
   const endXValue = width;
   const x1 = startXValue;
@@ -20,24 +21,16 @@ function setup() {
   const y1 = startYValue;
   const y2 = endYValue - startYValue;
 
-  const xAxis = randomX(numberOfValues, x1, x2);
-  const yAxis = randomY(numberOfValues, y1, y2);
+  const xAxis = random(numberOfValues, x1, x2);
+  const yAxis = random(numberOfValues, y1, y2);
 
   return { xAxis, yAxis, numberOfValues, height };
 }
 
-function randomX(numberOfValues, x1, x2) {
+function random(numberOfValues, x1, x2) {
   const values = [];
   for (let a = 0; a < numberOfValues; a++) {
     values.push(x1 + Math.random() * x2);
-  }
-  return values;
-}
-
-function randomY(numberOfValues, y1, y2) {
-  const values = [];
-  for (let a = 0; a < numberOfValues; a++) {
-    values.push(y1 + Math.random() * y2);
   }
   return values;
 }
