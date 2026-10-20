@@ -10,8 +10,8 @@ function setup() {
   r.SetTargetFPS(fps);
 
   const numberOfValues = 50;
-  const startValue = 50;
-  const endValue = 300;
+  const startValue = 200;
+  const endValue = 250;
   const x1 = startValue;
   const x2 = endValue - startValue;
 
@@ -23,6 +23,8 @@ function setup() {
 function random(numberOfValues, x1, x2) {
   const values = [];
   for (let a = 0; a < numberOfValues; a++) {
+    console.log(x1 + Math.random() * x2);
+
     values.push(x1 + Math.random() * x2);
   }
   return values;
