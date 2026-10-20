@@ -34,10 +34,10 @@ function randomX(numberOfValues, x1, x2) {
   return values;
 }
 
-function randomY(numberOfValues, x1, x2) {
+function randomY(numberOfValues, y1, y2) {
   const values = [];
   for (let a = 0; a < numberOfValues; a++) {
-    values.push(x1 + Math.random() * x2);
+    values.push(y1 + Math.random() * y2);
   }
   return values;
 }
