@@ -1,57 +1,59 @@
-const r = require("raylib");
+// const r = require("raylib");
 
-function setup() {
-  const width = 600;
-  const height = 400;
-  const fps = 60;
+// function setup() {
+//   const width = 600;
+//   const height = 400;
+//   const fps = 60;
 
-  r.SetTraceLogLevel(r.LOG_NONE);
-  r.InitWindow(width, height, "random");
-  r.SetTargetFPS(fps);
+//   r.SetTraceLogLevel(r.LOG_NONE);
+//   r.InitWindow(width, height, "random");
+//   r.SetTargetFPS(fps);
 
-  const numberOfValues = 50;
-  const x = random(numberOfValues);
+//   const numberOfValues = 50;
+//   const x = random(numberOfValues);
 
-  return { x, numberOfValues, height };
-}
+//   return { x, numberOfValues, height };
+// }
 
 function random(numberOfValues) {
   const values = [];
   for (let a = 0; a < numberOfValues; a++) {
-    values.push(Math.random() * 600);
+    values.push(Math.random() * 80);
   }
   return values;
 }
 
-function drawLines(world) {
-  for (let key = 0; key < world.numberOfValues; key++) {
-    r.DrawLine(world.x[key], 0, world.x[key], world.height, r.WHITE);
-  }
-}
+console.log(random(10));
 
-function draw(world) {
-  r.BeginDrawing();
-  r.ClearBackground(r.DARKBLUE);
+// function drawLines(world) {
+//   for (let key = 0; key < world.numberOfValues; key++) {
+//     r.DrawLine(world.x[key], 0, world.x[key], world.height, r.WHITE);
+//   }
+// }
 
-  drawLines(world);
+// function draw(world) {
+//   r.BeginDrawing();
+//   r.ClearBackground(r.DARKBLUE);
 
-  r.EndDrawing();
-}
+//   drawLines(world);
 
-function loop(world) {
-  while (!r.WindowShouldClose()) {
-    draw(world);
-  }
-}
+//   r.EndDrawing();
+// }
 
-function teardown() {
-  r.CloseWindow();
-}
+// function loop(world) {
+//   while (!r.WindowShouldClose()) {
+//     draw(world);
+//   }
+// }
 
-function main() {
-  const world = setup();
-  loop(world);
-  teardown();
-}
+// function teardown() {
+//   r.CloseWindow();
+// }
 
-main();
+// function main() {
+//   const world = setup();
+//   loop(world);
+//   teardown();
+// }
+
+// main();
