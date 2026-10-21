@@ -1,0 +1,87 @@
+const r = require("raylib");
+
+function setup() {
+  const width = 800;
+  const height = 500;
+  const fps = 60;
+
+  r.SetTraceLogLevel(r.LOG_NONE);
+  r.InitWindow(width, height, "random");
+  r.SetTargetFPS(fps);
+
+  const rectangle = {
+    x: 200,
+    y: 100,
+    width: 400,
+    height: 250,
+  };
+
+  const numberOfValues = 100;
+
+  const startXValue = 200;
+  const endXValue = 500;
+  const x1 = startXValue;
+  const x2 = endXValue - startXValue;
+
+  const startYValue = 150;
+  const endYValue = 300;
+  const y1 = startYValue;
+  const y2 = endYValue - startYValue;
+
+  const xAxis = random(numberOfValues, x1, x2);
+  const yAxis = random(numberOfValues, y1, y2);
+
+  return { xAxis, yAxis, numberOfValues, height, rectangle };
+}
+
+function random(numberOfValues, x1, x2) {
+  const values = [];
+  for (let a = 0; a < numberOfValues; a++) {
+    values.push(x1 + Math.random() * x2);
+  }
+  return values;
+}
+
+function drawCircle(world) {
+  const colour = r.ColorAlpha(r.WHITE, 0.6);
+
+  for (let key = 0; key < world.numberOfValues; key++) {
+    r.DrawCircle(world.xAxis[key], world.yAxis[key], 10, colour);
+  }
+}
+
+function drawParallelogram() {
+  r.DrawLine(200, 150, 500, 150, r.WHITE);
+  r.DrawLine(150, 300, 450, 300, r.WHITE);
+  r.DrawLine(200, 150, 150, 300, r.WHITE);
+  r.DrawLine(500, 150, 450, 300, r.WHITE);
+}
+
+function draw(world) {
+  r.BeginDrawing();
+  r.ClearBackground(r.DARKBLUE);
+
+  drawCircle(world);
+  drawParallelogram();
+  //   r.DrawRectangleLinesEx(world.rectangle, 2, r.WHITE);
+
+  r.EndDrawing();
+}
+
+function loop(world) {
+  while (!r.WindowShouldClose()) {
+    draw(world);
+  }
+}
+
+function teardown() {
+  r.CloseWindow();
+}
+
+function main() {
+  const world = setup();
+  loop(world);
+  teardown();
+}
+
+main();

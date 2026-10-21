@@ -1,0 +1,78 @@
+const r = require("raylib");
+
+function setup() {
+  const width = 800;
+  const height = 400;
+  const fps = 60;
+
+  r.SetTraceLogLevel(r.LOG_NONE);
+  r.InitWindow(width, height, "random");
+  r.SetTargetFPS(fps);
+
+  const numberOfValues = 100;
+
+  const startXValue = 0;
+  const endXValue = width;
+  const x1 = startXValue;
+  const x2 = endXValue - startXValue;
+
+  const startYValue = 0;
+  const endYValue = height;
+  const y1 = startYValue;
+  const y2 = endYValue - startYValue;
+
+  const xAxis = random(numberOfValues, x1, x2);
+  const yAxis = random(numberOfValues, y1, y2);
+
+  return { xAxis, yAxis, numberOfValues, height };
+}
+
+function random(numberOfValues, x1, x2) {
+  const values = [];
+  for (let a = 0; a < numberOfValues; a++) {
+    values.push((x1 + Math.random() * x2) * 2);
+  }
+  return values;
+}
+
+function add(world) {
+  return (
+    world.x1 + Math.random() * world.x2 + (world.y1 + Math.random() * world.y2)
+  );
+}
+
+function drawCircle(world) {
+  const colour = r.ColorAlpha(r.WHITE, 0.6);
+  const addValues = add(world);
+
+  for (let key = 0; key < world.numberOfValues; key++) {
+    r.DrawCircle(addValues[key], world.yAxis[key], 10, colour);
+  }
+}
+
+function draw(world) {
+  r.BeginDrawing();
+  r.ClearBackground(r.DARKBLUE);
+
+  drawCircle(world);
+
+  r.EndDrawing();
+}
+
+function loop(world) {
+  while (!r.WindowShouldClose()) {
+    draw(world);
+  }
+}
+
+function teardown() {
+  r.CloseWindow();
+}
+
+function main() {
+  const world = setup();
+  loop(world);
+  teardown();
+}
+
+main();
