@@ -18,26 +18,21 @@ function setup() {
 
   const numberOfValues = 100;
 
-  const startXValue = rectangle.x;
-  const endXValue = rectangle.x + rectangle.width;
-  const x1 = startXValue;
-  const x2 = endXValue - startXValue;
+  const randomValue = getRandomPoints(numberOfValues, rectangle);
 
-  const startYValue = rectangle.y;
-  const endYValue = rectangle.y + rectangle.height;
-  const y1 = startYValue;
-  const y2 = endYValue - startYValue;
-
-  const xAxis = random(numberOfValues, x1, x2);
-  const yAxis = random(numberOfValues, y1, y2);
-
-  return { xAxis, yAxis, numberOfValues, height, rectangle };
+  return { randomValue, numberOfValues, height, rectangle };
 }
 
-function random(numberOfValues, x1, x2) {
+function random(x1, x2) {
+  return x1 + Math.random() * (x2 - x1);
+}
+
+function getRandomPoints(numberOfValues, rectangle) {
   const values = [];
   for (let a = 0; a < numberOfValues; a++) {
-    values.push(x1 + Math.random() * x2);
+    const xAxis = random(rectangle.x, rectangle.x + rectangle.width);
+    const yAxis = random(rectangle.y, rectangle.y + rectangle.height);
+    values.push({ x: xAxis, y: yAxis });
   }
   return values;
 }
@@ -46,7 +41,7 @@ function drawCircle(world) {
   const colour = r.ColorAlpha(r.WHITE, 0.6);
 
   for (let key = 0; key < world.numberOfValues; key++) {
-    r.DrawCircle(world.xAxis[key], world.yAxis[key], 10, colour);
+    r.DrawCircleV(world.randomValue[key], 10, colour);
   }
 }
 

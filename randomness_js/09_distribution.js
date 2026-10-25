@@ -105,15 +105,15 @@ function draw(world) {
 
   drawCircle(world);
 
-  console.log(areaOfCircle(world));
+  //   console.log(areaOfCircle(world));
 
-  r.DrawRectangleLinesEx(world.rectangle, 2, r.WHITE);
+  r.DrawRectangleLinesEx(world.rectangle, 2, r.MAROON);
 
   r.DrawCircleLines(
     world.circle.x,
     world.circle.y,
     world.circle.radius,
-    r.WHITE,
+    r.MAROON,
   );
 
   r.EndDrawing();
