@@ -63,7 +63,6 @@ function draw(world) {
 
   drawCircle(world);
   drawParallelogram();
-  //   r.DrawRectangleLinesEx(world.rectangle, 2, r.WHITE);
 
   r.EndDrawing();
 }

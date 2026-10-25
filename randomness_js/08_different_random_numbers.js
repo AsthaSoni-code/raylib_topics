@@ -2,22 +2,22 @@ const r = require("raylib");
 
 function setup() {
   const width = 800;
-  const height = 400;
+  const height = 800;
   const fps = 60;
 
   r.SetTraceLogLevel(r.LOG_NONE);
   r.InitWindow(width, height, "random");
   r.SetTargetFPS(fps);
 
-  const numberOfValues = 100;
+  const numberOfValues = 1000;
 
-  const startXValue = 0;
-  const endXValue = width;
+  const startXValue = 200;
+  const endXValue = width - 500;
   const x1 = startXValue;
   const x2 = endXValue - startXValue;
 
-  const startYValue = 0;
-  const endYValue = height;
+  const startYValue = 200;
+  const endYValue = height - 500;
   const y1 = startYValue;
   const y2 = endYValue - startYValue;
 
@@ -30,23 +30,20 @@ function setup() {
 function random(numberOfValues, x1, x2) {
   const values = [];
   for (let a = 0; a < numberOfValues; a++) {
-    values.push((x1 + Math.random() * x2) * 2);
+    // values.push(x1 + (Math.random() + Math.random()) * x2);
+    // values.push(x1 + (Math.random() - Math.random()) * x2);
+    values.push(x1 + (Math.random() / Math.random()) * x2);
+    // values.push(
+    //   x1 + ((Math.random() + Math.random() + Math.random()) / 3) * x2);
   }
   return values;
 }
 
-function add(world) {
-  return (
-    world.x1 + Math.random() * world.x2 + (world.y1 + Math.random() * world.y2)
-  );
-}
-
 function drawCircle(world) {
   const colour = r.ColorAlpha(r.WHITE, 0.6);
-  const addValues = add(world);
 
   for (let key = 0; key < world.numberOfValues; key++) {
-    r.DrawCircle(addValues[key], world.yAxis[key], 10, colour);
+    r.DrawCircle(world.xAxis[key], world.yAxis[key], 10, colour);
   }
 }
 
