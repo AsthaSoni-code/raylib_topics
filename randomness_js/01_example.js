@@ -11,16 +11,9 @@ function setup() {
 
   const numberOfValues = 50;
 
-  // const startValue = 200;
-  // const endValue = 250;
-  // const x1 = startValue;
-  // const x2 = endValue - startValue;
-
-  // const xAxis = random(numberOfValues, x1, x2);
-
   randomValues = getRandomPoints(numberOfValues);
 
-  return { xAxis, numberOfValues, height };
+  return { randomValues, numberOfValues, height };
 }
 
 function random(x1, x2) {
@@ -37,24 +30,16 @@ function getRandomPoints(numberOfValues) {
   }
   return values;
 }
-// function random(numberOfValues, x1, x2) {
-//   const values = [];
-//   for (let a = 0; a < numberOfValues; a++) {
-//     console.log(x1 + Math.random() * x2);
-
-//     values.push(x1 + Math.random() * x2);
-//   }
-//   return values;
-// }
 
 function drawLines(world) {
   for (let key = 0; key < world.numberOfValues; key++) {
-    r.DrawLineV(
-      randomValues[key],
+    r.DrawLine(
+      world.randomValues[key],
       0,
-      randomValues[(key, world.height, r.WHITE)],
+      world.randomValues[key],
+      world.height,
+      r.WHITE,
     );
-    // r.DrawLine(world.xAxis[key], 0, world.xAxis[key], world.height, r.WHITE);
   }
 }
 

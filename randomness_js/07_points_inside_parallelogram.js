@@ -30,7 +30,7 @@ function getRandomPoints(numberOfValues, line, parallelogram, offSet) {
   const values = [];
 
   for (let a = 0; a < numberOfValues; a++) {
-    const yAxis = random(150, 300 - parallelogram.height / 2);
+    const yAxis = line.y1 + random(0, 1) * parallelogram.height;
     const shift = ((yAxis - line.y1) / parallelogram.height) * offSet;
     const xAxis = random(200 - shift, 500 - shift);
 
