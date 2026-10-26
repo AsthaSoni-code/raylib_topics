@@ -11,7 +11,7 @@ function setup() {
 
   const numberOfValues = 50;
 
-  randomValues = getRandomPoints(numberOfValues);
+  const randomValues = getRandomPoints(numberOfValues);
 
   return { randomValues, numberOfValues, height };
 }

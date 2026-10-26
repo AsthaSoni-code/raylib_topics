@@ -24,26 +24,23 @@ function setup() {
 
   const numberOfPoints = 1000;
 
-  const startXValue = rectangle.x;
-  const endXValue = rectangle.x + rectangle.width;
-  const x1 = startXValue;
-  const x2 = endXValue - startXValue;
+  const randomValues = getRandomPoints(numberOfPoints, rectangle);
 
-  const startYValue = rectangle.y;
-  const endYValue = rectangle.y + rectangle.height;
-  const y1 = startYValue;
-  const y2 = endYValue - startYValue;
-
-  const xAxis = random(numberOfPoints, x1, x2);
-  const yAxis = random(numberOfPoints, y1, y2);
-
-  return { xAxis, yAxis, circle, rectangle, numberOfPoints, height };
+  return { randomValues, circle, rectangle, numberOfPoints, height };
 }
 
-function random(numberOfPoints, x1, x2) {
+function random(x1, x2) {
+  return x1 + Math.random() * (x2 - x1);
+}
+
+function getRandomPoints(numberOfPoints, rectangle) {
   const values = [];
+
   for (let a = 0; a < numberOfPoints; a++) {
-    values.push(x1 + Math.random() * x2);
+    const xAxis = random(rectangle.x, rectangle.x + rectangle.width);
+    const yAxis = random(rectangle.y, rectangle.y + rectangle.height);
+
+    values.push({ x: xAxis, y: yAxis });
   }
   return values;
 }
@@ -52,7 +49,12 @@ function drawCircle(world) {
   const colour = r.ColorAlpha(r.WHITE, 0.6);
 
   for (let key = 0; key < world.numberOfPoints; key++) {
-    r.DrawCircle(world.xAxis[key], world.yAxis[key], 10, colour);
+    r.DrawCircle(
+      world.randomValues[key].x,
+      world.randomValues[key].y,
+      10,
+      colour,
+    );
   }
 }
 
@@ -67,8 +69,8 @@ function calcDistance(world) {
   const pointInside = [];
 
   for (let key = 0; key < world.numberOfPoints; key++) {
-    const x1 = world.xAxis[key];
-    const y1 = world.yAxis[key];
+    const x1 = world.randomValues[key].x;
+    const y1 = world.randomValues[key].y;
     const x2 = world.circle.x;
     const y2 = world.circle.y;
 
@@ -105,7 +107,7 @@ function draw(world) {
 
   drawCircle(world);
 
-  //   console.log(areaOfCircle(world));
+  console.log(areaOfCircle(world));
 
   r.DrawRectangleLinesEx(world.rectangle, 2, r.MAROON);
 

@@ -17,7 +17,12 @@ function setup() {
 
   const offSet = calcOffSet(parallelogram);
 
-  randomValues = getRandomPoints(numberOfValues, line, parallelogram, offSet);
+  const randomValues = getRandomPoints(
+    numberOfValues,
+    line,
+    parallelogram,
+    offSet,
+  );
 
   return { randomValues, parallelogram, numberOfValues, height, line, offSet };
 }
