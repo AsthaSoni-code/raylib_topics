@@ -11,26 +11,22 @@ function setup() {
 
   const numberOfValues = 100;
 
-  const startXValue = 0;
-  const endXValue = width;
-  const x1 = startXValue;
-  const x2 = endXValue - startXValue;
+  randomValues = getRandomPoints(numberOfValues, height, width);
 
-  const startYValue = 0;
-  const endYValue = height;
-  const y1 = startYValue;
-  const y2 = endYValue - startYValue;
-
-  const xAxis = random(numberOfValues, x1, x2);
-  const yAxis = random(numberOfValues, y1, y2);
-
-  return { xAxis, yAxis, numberOfValues, height };
+  return { randomValues, numberOfValues, height, width };
 }
 
-function random(numberOfValues, x1, x2) {
+function random(x1, x2) {
+  return x1 + Math.random() * (x2 - x1);
+}
+
+function getRandomPoints(numberOfValues, height, width) {
   const values = [];
+
   for (let a = 0; a < numberOfValues; a++) {
-    values.push(x1 + Math.random() * x2);
+    const yAxis = random(0, height);
+    const xAxis = random(0, width);
+    values.push({ x: xAxis, y: yAxis });
   }
   return values;
 }
@@ -39,7 +35,12 @@ function drawCircle(world) {
   const colour = r.ColorAlpha(r.WHITE, 0.6);
 
   for (let key = 0; key < world.numberOfValues; key++) {
-    r.DrawCircle(world.xAxis[key], world.yAxis[key], 10, colour);
+    r.DrawCircle(
+      world.randomValues[key].x,
+      world.randomValues[key].y,
+      10,
+      colour,
+    );
   }
 }
 
