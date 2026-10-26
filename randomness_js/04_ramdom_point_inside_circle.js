@@ -15,28 +15,24 @@ function setup() {
     radius: 400,
   };
 
-  const startXValue = circle.x;
-  const endXValue = circle.radius;
-  const x1 = startXValue;
-  const x2 = endXValue - startXValue;
-
-  const startYValue = circle.y;
-  const endYValue = 360;
-  const y1 = startYValue;
-  const y2 = endYValue - startYValue;
-
   const numberOfValues = 1000;
 
-  const xAxis = random(numberOfValues, x1, x2);
-  const yAxis = random(numberOfValues, y1, y2);
+  randomValues = getRandomPoints(numberOfValues, circle);
 
-  return { xAxis, yAxis, numberOfValues, height, circle };
+  return { numberOfValues, circle, randomValues };
 }
 
-function random(numberOfValues, x1, x2) {
+function random(x1, x2) {
+  return x1 + Math.random() * (x2 - x1);
+}
+
+function getRandomPoints(numberOfValues, circle) {
   const values = [];
+
   for (let a = 0; a < numberOfValues; a++) {
-    values.push(x1 + Math.random() * x2);
+    const yAxis = random(circle.y, 360);
+    const xAxis = random(circle.x, circle.radius);
+    values.push({ x: xAxis, y: yAxis });
   }
   return values;
 }
@@ -45,8 +41,10 @@ function drawCircle(world) {
   const colour = r.ColorAlpha(r.WHITE, 0.6);
 
   for (let key = 0; key < world.numberOfValues; key++) {
-    const distance = world.xAxis[key] * Math.cos(world.yAxis[key]);
-    const angle = world.xAxis[key] * Math.sin(world.yAxis[key]);
+    const distance =
+      world.randomValues[key].x * Math.cos(world.randomValues[key].y);
+    const angle =
+      world.randomValues[key].x * Math.sin(world.randomValues[key].y);
 
     r.DrawCircle(distance, angle, 10, colour);
   }
